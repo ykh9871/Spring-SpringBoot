@@ -25,6 +25,7 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+	implementation 'mysql:mysql-connector-java:8.0.31' // 사용하려는 MySQL Connector/J 버전
 }
 
 tasks.named('test') {

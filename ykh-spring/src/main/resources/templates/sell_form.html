@@ -1,0 +1,27 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+  <h5 class="my-3 border-bottom pb-2">판매 등록</h5>
+  <form th:object="${sellForm}" method="post" enctype="multipart/form-data">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+    <div class="mb-3">
+      <label for="subject" class="form-label">제목</label>
+      <input type="text" th:field="*{subject}" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label for="content" class="form-label">내용</label>
+      <textarea th:field="*{content}" class="form-control" rows="10"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">가격</label>
+      <input type="number" th:field="*{price}" class="form-control" style="width: 10%" step="1000" min="0">
+    </div>
+    <div class="mb-3">
+      <label for="upload">업로드</label>
+      <input type="file" class="form-control" id="upload" name="upload">
+      <p th:if="${filename != null}" th:text="|업로드 했던 파일 : ${filename}|" class="card-text" ></p>
+    </div>
+    <input type="submit" value="저장하기" class="btn btn-primary my-2">
+  </form>
+</div>
+</html>

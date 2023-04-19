@@ -1,11 +1,18 @@
 <html layout:decorate="~{layout}">
+<!-- 현재 templates의 파일 중 layout 파일을 부모로 지정
+decorate는 공통 레이아웃임을 의미 -->
+<!-- 이전 layout.html에서 CSS를 로드하고 있기 때문에 상속을 통해 navbar를 위치시키면
+bootstrap css는 자동 적용 -->
 <div layout:fragment="content" class="container my-3">
+  <!-- layout.html에서 지정한 내용이 상속되어 표현될 부분인
+  fragment="content" 해당 속성과 값을 작성한 <div> 태그를 위치 -->
   <div class="my-3 border-bottom">
     <div>
       <h1>회원가입</h1>
     </div>
   </div>
   <form th:action="@{/user/signup}" th:object="${userCreateForm}" method="post">
+    <div th:replace="~{form_errors :: formErrorsFragment}"></div>
     <div class="mb-3">
       <label for="username" class="form-label">사용자ID</label>
       <input type="text" th:field="*{username}" class="form-control">
@@ -26,3 +33,16 @@
   </form>
 </div>
 </html>
+<!-- th:action 해당 경로로 요청
+        회원가입 수행 시 데이터들이 전달될 매핑 경로
+        경로를 포기할 때는 @{}로 문법이 적용 -->
+<!-- th:object : 객체 매핑
+해당 오브젝트 정보를 model에 담아서 넘겨주어야함
+등록 폼이기 때문에 데이터가 비어있는 객체를 만들어서 템플릿에 전달 -->
+<!-- th:field : 매핑한 객체의 요소
+HTML Input 태그의 id, name, value 속성을 자동으로 생성
+*{..} -> th:object에서 선택한 객체에 접근 ${객체.필드}와 동일
+id, name은 th:field에서 지정한 변수 이름과 동일하게 생성
+value는 th:field에서 지정한 변수의 값(model의 값들)을 사용 -->
+<!-- GetMapping을 통해 userCreateForm을 넘겨주기 때문에
+위 템플릿 관련 문법(object, field)이 사용 가능함 -->

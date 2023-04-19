@@ -1,0 +1,11 @@
+<div th:fragment="formErrorsFragment" class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+  <div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+</div>
+<!-- #fields.hasAnyErrors가 true인 경우는 UserCreateForm 검증이 실패한 경우 -->
+<!-- UserCreateForm에서 검증에 실패한 오류 메시지를 #fields.allErrors()로 반환 -->
+<!-- 부트스트랩의 alert alert-danger 클래스를 사용해 오류는 붉은 색으로 표시 -->
+<!--
+    이렇게 오류를 표시하기 위해서는 타임리프의 th:object 속성이 반드시 필요
+    th:object를 사용해 폼의 속성들이 UserCreateForm의 속성들로 구성된다는 점을 타임리프에 알려줘야 하기 때문
+    따라서 각 <input> 태그 마다 th:field=*{값이름}을 구성하여 자동으로 속성들이 생성되게 구성
+ -->

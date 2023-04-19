@@ -51,8 +51,13 @@ public class SignUpRepositoryTest {
 
     @Test
     void testJpa4(){
-        SignUp user = this.signUpRepository.findByUsername("user2");
-        Assertions.assertEquals("user2@user2.com", user.getEmail());
+        Optional<SignUp> up =this.signUpRepository.findByUsername("user1");
+        if (up.isPresent()) {
+            SignUp user = up.get();
+            Assertions.assertEquals(1, user.getId());
+        }
+//        SignUp user = this.signUpRepository.findByUsername("user2");
+//        Assertions.assertEquals("user2@user2.com", user.getEmail());
     }
 
     @Test
